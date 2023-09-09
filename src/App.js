@@ -1,23 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import { ListaAcciones } from './components/resumen';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Bienvenidos a DeliverIt!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Rama de Martín
-        </a>
-      </header>
+    <div className="App"> 
+      <ListaAcciones />
+      
     </div>
   );
 }
