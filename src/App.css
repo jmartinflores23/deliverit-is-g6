@@ -1,27 +1,54 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+div .lineaVertical{
+  width: 2px;
+  height: 50%; 
+  background-color: black;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.caja{
+  background-color: rgb(211, 95, 192);
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
+  width: 500px;
+  height: 300px;
+  margin-left: 50px;
+}
+.cajaEfectivo{
+  align-items: center;
+  color: black;
+  width: 400px;
+  height: 150px;
+  margin-left: 30px;
+  margin-top: 100px;
+}
+
+.separados{
+  margin: 50px;
+  display: flex;
+}
+.separados .box{
+  display: inline;
+  text-align: left;
+}
+
+.cajaTarjeta{
+  background-color: rgb(211, 95, 192);
+  align-items: left;
+  color: black;
+  width: 500px;
+  height: 300px;
+  margin-top: 100px;
+  margin-left: 700px;
+  margin-right: 50px;
+  align-items: left;
+  border: 2px ;
+}
+
+.cajaTarjeta div{
+  text-align: left;
+  margin-left: 35px;
 }
 
 .App-link {
