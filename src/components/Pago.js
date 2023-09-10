@@ -1,45 +1,57 @@
-import React, {useState} from 'react'
-import '../App.css'
+import React, { useState } from 'react'
+import { Select, Stack, Box, Heading, Flex, Text, Input, Textarea, Radio, RadioGroup } from '@chakra-ui/react';
 
-function Pago({formData, setForm}) {
+function Pago({ formData, setForm }) {
   const [opcionSelecc, setOpcionSelecc] = useState('efectivo');
-  
-      const cambioOpcion = (event) => {
-          setOpcionSelecc(event.target.value);
-    return (
-      <div class="separados">
-        <div class="box">
-          <label> 
-            <input type="radio"value="efectivo" checked={opcionSelecc === 'efectivo'} onChange={cambioOpcion} /> Efectivo
+
+  const cambioOpcion = (event) => {
+    setOpcionSelecc(event.target.value)
+  };
+  return (
+
+    <Box textAlign='center' >
+
+      <Stack isInline justifyContent='center'>
+        <Flex direction='column' mr={300 }>
+          <label>
+            <input type="radio" value="efectivo" checked={opcionSelecc === 'efectivo'} onChange={cambioOpcion} /> Efectivo
           </label>
-        </div>
-        <div class="box">
-          <label> 
-            <input type="radio"value="tarjeta" checked={opcionSelecc === 'tarjeta'} onChange={cambioOpcion} /> Tarjeta
+        </Flex>
+        <Flex direction='column' ml={300}>
+          <label>
+            <input type="radio" value="tarjeta" checked={opcionSelecc === 'tarjeta'} onChange={cambioOpcion} /> Tarjeta
           </label>
-        </div>
-          
-          {opcionSelecc === 'efectivo' && 
-          <div class="cajaEfectivo">
-            <h3>INDIQUE CON CUANTO VA A ABONAR</h3><br/>
-            <input type="text"></input>
-          </div>}
-          {opcionSelecc === 'tarjeta' && 
-          <div class='cajaTarjeta'>
-            <div>
-              <label>N° Tarjeta </label> <input placeholder="0000-0000-0000-0000" className="form-control mb-3" type="number"/><br/><br/><br/>
-            </div>
-            <div>
-              <label>Caducidad: </label><input placeholder="MM" className="form-control mb-3" type="number"/> <input placeholder="AA" className="form-control mb-3" type="number"/><br/><br/><br/>
-            </div>
-            <div>
-              <label>CÓD SEGURIDAD</label> <input placeholder="000" className="form-control mb-3" type="number"/><br/>
-            </div>
-          </div>}
-      
+        </Flex>
+      </Stack>
+
+      <div style={{ display: "grid", gridTemplateColumns: "40% 60%" }}>
+      <Stack p={4} alignItems="center" justifyContent="center" marginBottom='266px'>
+      {opcionSelecc === 'efectivo' &&
+          <Stack>
+          <Text>INDIQUE CON CUANTO VA A ABONAR</Text>
+          <Input variant='filled' htmlsize={5} ></Input>
+          </Stack>}
+      </Stack>
+      <Stack p={4} alignItems="center" justifyContent="center">
+      {opcionSelecc === 'tarjeta' &&
+        <Stack my='5' textAlign='left' boxShadow='dark-lg' borderWidth={1} borderRadius='lg' p={4}>
+          <Stack isInline>
+            <Text>N° Tarjeta </Text> <Input size='sm' placeholder="0000-0000-0000-0000" type="number" /><br /><br /><br />
+          </Stack>
+          <Stack isInline >
+              <Text>Caducidad: </Text><Input size='sm' placeholder="MM"  type="number" /> <Input size='sm' htmlsize={4} widht='auto' placeholder="AA" type="number" /><br /><br /><br />
+          </Stack>
+          <Stack>
+              <Text>CÓD SEGURIDAD</Text> <Input placeholder="000" type="number" /><br />
+          </Stack>
+         
+        </Stack>}
+      </Stack>
       </div>
-    )
-  }
+
+    </Box>
+
+  )
 }
 
 export default Pago

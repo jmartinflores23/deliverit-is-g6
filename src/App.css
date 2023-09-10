@@ -26,11 +26,10 @@ div .lineaVertical{
 
 .separados{
   margin: 50px;
-  display: flex;
+
 }
 .separados .box{
   display: inline;
-  text-align: left;
 }
 
 .cajaTarjeta{
