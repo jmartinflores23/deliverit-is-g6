@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import { Button, Heading, Stack, Box } from '@chakra-ui/react';
+import React, { useState } from 'react';
 import Direccion from './Direccion';
-import Pago from './Pago';
 import Hora from './Hora';
-import Resumen from './Resumen';
+import Pago from './Pago';
 import Progreso from './Progreso';
-import { Select, Stack, Box, Heading, Flex, Text, Input, Button, Textarea, } from '@chakra-ui/react';
+import Resumen from './Resumen';
 
 function Formulario() {
 
@@ -34,20 +34,22 @@ function Formulario() {
       case 2:
         return <Hora formData={formData} setFormData={setFormData} />
       case 3:
-        return <Resumen formData={formData} setFormData={setFormData} />
+        return <Resumen formData={formData} setPage={setPage} />
     }
   }
   return (
     <div className='form'>
-      <span className='progressbar'>
+      <Box mx='20' my='7' className='progressbar'>
         <Progreso page={page} titulos={FormTitles} />
-      </span>
+      </Box>
       <div className='form-container'>
         <Heading p={5} className='header'>
           <h1>{FormTitles[page]}</h1>
         </Heading>
-        <div className='body'>{PageDisplay()}</div>
-        <div className='footer'>
+        <Box className='body'>
+            {PageDisplay()}
+        </Box>
+        <Box mx='10' my='7' className='footer'>
           <Stack my='4' isInline justifyContent='space-between'>
             <Button
               disabled={page === 0}
@@ -55,20 +57,29 @@ function Formulario() {
                 setPage((currPage) => currPage - 1);
               }}
             >Volver</Button>
-            <Button
-              onClick={() => {
-                if (page === FormTitles.length - 1) {
-                  alert("Pedido Confirmado");
-                  console.log(formData)
-                } else {
-                  setPage((currPage) => currPage + 1);
-                }
-              }}
-            >
-              {page === FormTitles.length - 1 ? "Confirmar Pedido" : "Siguiente"}
-            </Button>
+            <Stack isInline>
+              <Button align='end' colorScheme='red'
+                onClick={() => {
+                  alert("Pedido Cancelado");
+                }}
+              >
+                Cancelar pedido
+              </Button>
+              <Button align='end' colorScheme='green'
+                onClick={() => {
+                  if (page === FormTitles.length - 1) {
+                    alert("Pedido Confirmado");
+                    console.log(formData)
+                  } else {
+                    setPage((currPage) => currPage + 1);
+                  }
+                }}
+              >
+                {page === FormTitles.length - 1 ? "Confirmar Pedido" : "Siguiente"}
+              </Button>
+            </Stack>
           </Stack>
-        </div>
+        </Box>
       </div>
     </div>
   )
