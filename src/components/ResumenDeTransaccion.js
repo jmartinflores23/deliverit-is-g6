@@ -34,6 +34,7 @@ function ResumenDeTransaccion({ formData, setPage }) {
                         <ListItem>
                             <ListIcon as={MdCheckCircle} color='green.500' />
                             Forma de pago
+                            <Text fontSize='sm'> {formData.formaDePago}, {formData.cantidadEfectivo}, {formData.numeroTarjeta}, {formData.fechaVen}, {formData.codSeg}</Text>
                         </ListItem>
                         <Button colorScheme='pink' size='xs' onClick={() => {
                             setPage(1);
