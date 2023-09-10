@@ -2,6 +2,10 @@ import React from 'react'
 import { List, ListItem, ListIcon, Stack, Divider, Button, Box, Flex, Text } from '@chakra-ui/react';
 import { MdCheckCircle } from "react-icons/md";
 function ResumenDeTransaccion({ formData, setPage }) {
+    const capitalizeFirst = str => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      };
+
     return (
         <Flex justifyContent='center'>
             <Box textAlign='left' boxShadow='dark-lg' borderWidth={1} borderRadius='lg' m={4} p={4} w="75%">
@@ -34,7 +38,7 @@ function ResumenDeTransaccion({ formData, setPage }) {
                         <ListItem>
                             <ListIcon as={MdCheckCircle} color='green.500' />
                             Forma de pago
-                            <Text fontSize='sm'> {formData.formaDePago}, {formData.cantidadEfectivo}, {formData.numeroTarjeta}, {formData.fechaVen}, {formData.codSeg}</Text>
+                            <Text fontSize='sm'> {capitalizeFirst(formData.formaDePago)}, {formData.cantidadEfectivo}, {formData.numeroTarjeta}, {formData.fechaVen}, {formData.codSeg}</Text>
                         </ListItem>
                         <Button colorScheme='pink' size='xs' onClick={() => {
                             setPage(1);
