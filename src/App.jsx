@@ -1,5 +1,5 @@
 import './App.css';
-import OpcionesPago from './components/components-seba/OpcionesPago';
+import Formulario from './components/Formulario';
 
 
 
@@ -8,8 +8,7 @@ function App() {
     <div className="App">
       
       <h2>Forma Pago</h2>
-      <OpcionesPago/>
-      
+      <Formulario/>
     </div>
   );
 }
