@@ -55,7 +55,7 @@ function Formulario() {
             <Button
               disabled={page === 0}
               onClick={() => {
-                setPage((currPage) => currPage);
+                setPage((currPage) => page === 0 ? currPage : currPage - 1);
               }}
             >Volver</Button>
             <Stack isInline>

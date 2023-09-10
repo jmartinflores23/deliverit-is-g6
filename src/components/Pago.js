@@ -4,12 +4,15 @@ import {  Stack, Box, Heading, Flex, Text, Input, Radio, RadioGroup } from '@cha
 function Pago({ formData, setFormData }) {
   const [opcionSelecc, setOpcionSelecc] = useState('');
 
+
   const cambioOpcion = (event) => {
     const nuevaFormaPago = event.target.value;
     setOpcionSelecc(nuevaFormaPago);
     // Actualiza formData con la nueva formaDePago
     setFormData({ ...formData, formaDePago: nuevaFormaPago });
   };
+
+
 
   // Restablecer los campos de tarjeta cuando cambia la opción de pago
 
@@ -19,19 +22,19 @@ function Pago({ formData, setFormData }) {
       <Stack isInline justifyContent='center'>
         <Flex direction='column' mr={300}>
           <label>
-            <input type="radio" value="efectivo" checked={opcionSelecc === 'efectivo'} onChange={cambioOpcion}/> Efectivo
+            <input type="radio" value="efectivo" checked={formData.formaDePago === 'efectivo'} onChange={cambioOpcion}/> Efectivo
           </label> 
         </Flex>
         <Flex direction='column' ml={300}>
           <label>
-            <input type="radio" value="tarjeta" checked={opcionSelecc === 'tarjeta'} onChange={cambioOpcion}  /> Tarjeta
+            <input type="radio" value="tarjeta" checked={formData.formaDePago === 'tarjeta'} onChange={cambioOpcion}  /> Tarjeta
           </label>
         </Flex>
       </Stack>
 
       <div style={{ display: "grid", gridTemplateColumns: "40% 60%" }}>
       <Stack p={4} alignItems="center" justifyContent="center" marginBottom='266px'>
-      {opcionSelecc === 'efectivo' &&
+      {formData.formaDePago === 'efectivo' &&
           <Stack>
           <Text>INDIQUE CON CUANTO VA A ABONAR</Text>
           <Input placeholder={formData.cantidadEfectivo || "$ Monto a abonar"} onChange={(e) =>
@@ -39,7 +42,7 @@ function Pago({ formData, setFormData }) {
           </Stack>}
       </Stack>
       <Stack p={4} alignItems="center" justifyContent="center">
-      {opcionSelecc === 'tarjeta' &&
+      {formData.formaDePago === 'tarjeta' &&
         <Stack  my='5' textAlign='left' boxShadow='dark-lg' borderWidth={1} borderRadius='lg' p={7} widht='full'>
           <Stack isInline>
             <Text>N° Tarjeta </Text> <Input size='sm' placeholder={formData.numeroTarjeta || "0000-0000-0000-0000"} 
