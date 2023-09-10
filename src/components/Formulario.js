@@ -5,6 +5,7 @@ import Hora from './Hora';
 import Pago from './Pago';
 import Progreso from './Progreso';
 import ResumenDeTransaccion from './ResumenDeTransaccion';
+import Swal from 'sweetalert2';
 
 function Formulario() {
 
@@ -54,13 +55,13 @@ function Formulario() {
             <Button
               disabled={page === 0}
               onClick={() => {
-                setPage((currPage) => currPage - 1);
+                setPage((currPage) => currPage);
               }}
             >Volver</Button>
             <Stack isInline>
               <Button align='end' colorScheme='red'
                 onClick={() => {
-                  alert("Pedido Cancelado");
+                  cancelarPedido();
                 }}
               >
                 Cancelar pedido
@@ -68,7 +69,7 @@ function Formulario() {
               <Button align='end' colorScheme='green'
                 onClick={() => {
                   if (page === FormTitles.length - 1) {
-                    alert("Pedido Confirmado");
+                    confirmarPedido();
                     console.log(formData)
                   } else {
                     setPage((currPage) => currPage + 1);
@@ -83,6 +84,42 @@ function Formulario() {
       </div>
     </div>
   )
+}
+
+const confirmarPedido = () => 
+{
+    Swal.fire({
+        title: '¿Confirmar pedido?',
+        text: '¿Estás seguro de que deseas confirmar este pedido?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, confirmar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // El usuario ha confirmado el pedido, puedes realizar acciones aquí
+          Swal.fire('Pedido confirmado', 'El pedido se ha confirmado con éxito.', 'success');
+        }
+      });
+}
+
+const cancelarPedido = () => 
+{
+  Swal.fire({
+    title: '¿Cancelar pedido?',
+    text: '¿Estás seguro de que deseas cancelarr este pedido?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, cancelar',
+    cancelButtonText: 'No, no cancelar',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // El usuario ha confirmado el pedido, puedes realizar acciones aquí
+      Swal.fire('Pedido cancelado', 'El pedido se ha cancelado con éxito.', 'success');
+    }
+  });
+
+
 }
 
 export default Formulario
