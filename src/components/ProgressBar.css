@@ -1,0 +1,18 @@
+.step {
+    color: black;
+    width: 6rem;
+    height: 3rem;;
+    font-size: 12px;
+    background-color: pink;
+    border-radius: 10%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.step.completed {
+    background-color: palevioletred;
+    color: white;
+
+}
