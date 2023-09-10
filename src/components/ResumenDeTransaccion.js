@@ -46,6 +46,7 @@ function ResumenDeTransaccion({ formData, setPage }) {
                         <ListItem>
                             <ListIcon as={MdCheckCircle} color='green.500' />
                             Horario de entrega
+                            <Text fontsize='sm'> Lo antes posible: {formData.antesPosible}</Text>
                         </ListItem>
                         <Button colorScheme='pink' size='xs' onClick={() => {
                             setPage(2);
