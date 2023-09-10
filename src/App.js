@@ -1,13 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
-import { ListaAcciones } from './components/resumen';
+import Formulario from './components/Formulario';
+import React from 'react';
 
 function App() {
   return (
-    <div className="App"> 
-      <ListaAcciones />
-      
-    </div>
+   <div className='App'>
+
+    <Formulario />
+   </div>
   );
 }
 
