@@ -1,32 +1,46 @@
 import React from 'react'
+import { Select, Stack, Box, Heading, Flex, Text, Input, Textarea, } from '@chakra-ui/react';
 
-function Direccion({formData, setFormData}) {
+function Direccion({ formData, setFormData }) {
   return (
-    <div className='container'>
-          <label htmlFor='calle'>Calle</label>
-          <input type='text' value={formData.calle} onChange={(e) =>
-            setFormData({...formData, calle: e.target.value })} />
-        
-        
-        
-          <label htmlFor='numero'>Numero</label>
-          <input type='number'value={formData.numero} onChange={(e) =>
-            setFormData({...formData, numero: e.target.value })} />
-        
-
-          <label htmlFor='ciudad'>Ciudad</label>
-          <select  value={formData.ciudad} onChange={(e) =>
-            setFormData({...formData, ciudad: e.target.value })} >
-              <option value="cba">Cordoba</option>
-              <option value="jm">Jesus Maria</option>
-              <option value="vm">Villa Maria</option>
-              <option value="r4">Rio Cuarto</option>
-              <option value="cde">Cruz del Eje</option>
-          </select>
-          <label htmlFor='indicaciones' >Indicaciones para la entrega</label>
-          <textarea typeof='text' value={formData.indicaciones} onChange={(e) =>
-            setFormData({...formData, indicaciones: e.target.value })} />
-    </div>
+    <Flex width='full' align='left' justifyContent='center'>
+      <Box textAlign='center' px='10'>
+        <DireccionBody formData={formData} setFormData={setFormData} />
+      </Box>
+    </Flex>
+  )
+}
+const DireccionBody = ({ formData, setFormData }) => {
+  return (
+    <Box my='5' textAlign='left' borderWidth={1} p={7} width='full'>
+      <Stack isInline justifyContent='space-between'>
+        <Text> Calle:</Text>
+        <Input size='sm' placeholder='Ingrese su calle' onChange={(e) =>
+          setFormData({ ...formData, calle: e.target.value })} />
+        <Text>Nº:</Text>
+        <Input size='sm' placeholder='Número' onChange={(e) =>
+          setFormData({ ...formData, numero: e.target.value })} />
+      </Stack>
+      <Stack isInline p={3} my='4' justifyContent='space-between'>
+        <Text>Ciudad:</Text>
+        <SelectorDireccion formData={formData} setFormData={setFormData} />
+      </Stack>
+      <Text p={3}>Indicaciones para la entrega</Text>
+      <Textarea placeholder='Escriba aquí...' onChange={(e) =>
+        setFormData({ ...formData, indicaciones: e.target.value })} />
+    </Box>
+  )
+}
+const SelectorDireccion = ({ formData, setFormData }) => {
+  return (
+    <Select placeholder='Seleccionar Opción' size='sm' onChange={(e) =>
+      setFormData({ ...formData, ciudad: e.target.value })}>
+      <option value='Alta Gracia'> Alta Gracia</option>
+      <option value='Córdoba'>Córdoba</option>
+      <option value='Jesús María'> Jesús María</option>
+      <option value='Villa María'>Villa María</option>
+      <option value='Villa Allende'>Villa Allende</option>
+    </Select>
   )
 }
 
