@@ -1,13 +1,15 @@
 import './App.css';
 import Formulario from './components/Formulario';
-import React from 'react';
+
+
 
 function App() {
   return (
-   <div className='App'>
-
-    <Formulario />
-   </div>
+    <div className="App">
+      
+      <h2>Forma Pago</h2>
+      <Formulario/>
+    </div>
   );
 }
 
