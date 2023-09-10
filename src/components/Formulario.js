@@ -4,7 +4,7 @@ import Direccion from './Direccion';
 import Hora from './Hora';
 import Pago from './Pago';
 import Progreso from './Progreso';
-import Resumen from './Resumen';
+import ResumenDeTransaccion from './ResumenDeTransaccion';
 
 function Formulario() {
 
@@ -34,7 +34,7 @@ function Formulario() {
       case 2:
         return <Hora formData={formData} setFormData={setFormData} />
       case 3:
-        return <Resumen formData={formData} setPage={setPage} />
+        return <ResumenDeTransaccion formData={formData} setPage={setPage} />
     }
   }
   return (
