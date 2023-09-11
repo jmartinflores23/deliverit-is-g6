@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {Input} from '@chakra-ui/react';
+import InputMask from "react-input-mask";
 
 
 function ExpiryDateInput({ formFecha, setFormFecha }) {
@@ -45,7 +46,9 @@ function ExpiryDateInput({ formFecha, setFormFecha }) {
         value={formFecha.fechaVen || ''}
         size='sm' 
         placeholder={formFecha.fechaVen || "MM/AA"} onChange={(e) =>
-         handleExpiryDateChange && setFormFecha({ ...formFecha, fechaVen: e.target.value })}/>
+         handleExpiryDateChange && setFormFecha({ ...formFecha, fechaVen: e.target.value })}
+        as={InputMask} maskChar={null} mask="99/99"
+         />
       {!isValidExpiryDate(formFecha.fechaVen) && (
         <div style={{ color: 'red' }}>Ingrese una fecha válida y posterior a la actual.</div>
       )}

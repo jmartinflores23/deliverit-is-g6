@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select, Stack, Box, Heading, Flex, Text, Input, Textarea, NumberInputField, NumberInput} from '@chakra-ui/react';
+import { Select, Stack, Box, Heading, Flex, Text, Input, Textarea, NumberInputField, NumberInput, FormLabel} from '@chakra-ui/react';
 
 function Direccion({ formData, setFormData }) {
   return (
@@ -14,7 +14,7 @@ const DireccionBody = ({ formData, setFormData }) => {
   return (
     <Box my='5' textAlign='left' boxShadow='dark-lg' borderWidth={1} borderRadius='lg' p={7} width='full'>
       <Stack isInline justifyContent='space-between'  align='center'>
-        <Text> Calle:</Text>
+        <FormLabel> Calle:</FormLabel>
         <Input size='sm' placeholder={formData.calle || "Ingrese la calle:"} onChange={(e) =>
           setFormData({ ...formData, calle: e.target.value })} />
         <Text>Nº:</Text>
