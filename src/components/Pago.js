@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Stack, Box, Heading, Flex, Text, Input, Radio, RadioGroup } from '@chakra-ui/react';
+import InputMask from "react-input-mask";
+
 
 function Pago({ formData, setFormData }) {
   const [opcionSelecc, setOpcionSelecc] = useState('');
@@ -46,7 +48,7 @@ function Pago({ formData, setFormData }) {
             <Stack my='5' textAlign='left' boxShadow='dark-lg' borderWidth={1} borderRadius='lg' p={7} widht='full'>
               <Stack isInline>
                 <Text>N° Tarjeta </Text> <Input size='sm' placeholder={formData.numeroTarjeta || "0000-0000-0000-0000"}
-                  onChange={(e) => setFormData({ ...formData, numeroTarjeta: e.target.value, formaDePago: 'tarjeta', cantidadEfectivo: '' })} type="text" /><br /><br /><br />
+                  onChange={(e) => setFormData({ ...formData, numeroTarjeta: e.target.value, formaDePago: 'tarjeta', cantidadEfectivo: '' })} type="text" as={InputMask} maskChar={null} mask="9999-9999-9999-9999" /><br /><br /><br />
               </Stack>
               <Stack isInline >
                 <Text>Caducidad: </Text><Input size='sm' placeholder={formData.fechaVen || "MM/AA"} onChange={(e) =>
