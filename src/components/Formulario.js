@@ -121,7 +121,7 @@ function Formulario() {
                     setPage((currPage) => currPage + 1);
                   }
                 }}
-                isDisabled = {(noAvanzar)}
+                isDisabled = {noAvanzar(page)}
                 
               >
                 {page === FormTitles.length - 1 ? "Confirmar Pedido" : "Siguiente"}
