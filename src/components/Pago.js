@@ -74,8 +74,8 @@ function Pago({ formData, setFormData }) {
                   setFormData({ ...formData, fechaVen: e.target.value })} type="text" />*/}
               </Stack>
               <HStack>
-                <Text>CÓD SEGURIDAD</Text> <Input placeholder={formData.codSeg || "000"} onChange={(e) =>
-                  setFormData({ ...formData, codSeg: e.target.value })} type="number" /><br />
+                <Text>Codigo de Seguridad</Text> <Input placeholder={formData.codSeg || "000"} onChange={(e) =>
+                  setFormData({ ...formData, codSeg: e.target.value })} type="text"as={InputMask} maskChar={null} mask="999"/><br />
               </HStack>
 
             </Stack>}
