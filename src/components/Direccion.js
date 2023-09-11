@@ -1,10 +1,10 @@
-import React from 'react'
-import { Select, Stack, Box, Heading, Flex, Text, Input, Textarea, NumberInputField, NumberInput, FormLabel} from '@chakra-ui/react';
+import { Box, Flex, FormLabel, Input, NumberInput, NumberInputField, Select, SimpleGrid, Stack, Textarea } from '@chakra-ui/react';
+import React from 'react';
 
 function Direccion({ formData, setFormData }) {
   return (
     <Flex width='full' align='left' justifyContent='center'>
-      <Box textAlign='center' w= '75%' >
+      <Box textAlign='center' w='75%' >
         <DireccionBody formData={formData} setFormData={setFormData} />
       </Box>
     </Flex>
@@ -13,33 +13,40 @@ function Direccion({ formData, setFormData }) {
 const DireccionBody = ({ formData, setFormData }) => {
   return (
     <Box my='5' textAlign='left' boxShadow='dark-lg' borderWidth={1} borderRadius='lg' p={7} width='full'>
-      <Stack isInline justifyContent='space-between'  align='center'>
-        <FormLabel> Calle:</FormLabel>
-        <Input size='sm' placeholder={formData.calle || "Ingrese la calle:"} onChange={(e) =>
-          setFormData({ ...formData, calle: e.target.value })} />
-        <Text>Nº:</Text>
-        <NumberInput>
-          <NumberInputField size='sm' placeholder={formData.numero || "Ingrese el número:"} onChange={(e) =>
-          setFormData({ ...formData, numero: e.target.value })} />
-        </NumberInput>
-        
-      </Stack>
-      <Stack isInline p={3} my='4' justifyContent='space-between'  align='center'>
-        <FormLabel>Ciudad:</FormLabel>
-        <SelectorDireccion formData={formData} setFormData={setFormData} />
-      </Stack>
+      <SimpleGrid p='1' minChildWidth='120px' spacing={4} >
+        <Box>
+          <FormLabel> Calle:</FormLabel>
+          <Input borderWidth={2} placeholder={formData.calle || "Ingrese la calle:"} onChange={(e) =>
+            setFormData({ ...formData, calle: e.target.value })} />
+        </Box>
+        <Box>
+          <FormLabel borderRadius='lg' >Número:</FormLabel>
+          <NumberInput >
+            <NumberInputField borderWidth={2} placeholder={formData.numero || "Ingrese el número:"} onChange={(e) =>
+              setFormData({ ...formData, numero: e.target.value })} />
+          </NumberInput>
+        </Box>
+        <Box>
+
+          <FormLabel>Ciudad:</FormLabel>
+          <SelectorDireccion formData={formData} setFormData={setFormData} />
+
+
+        </Box>
+      </SimpleGrid>
+
 
       <Stack>
-      <FormLabel>Indicaciones para el repartidor:</FormLabel>
-      <Textarea placeholder={formData.indicaciones || "Opcionalmente puede agregarle notas a su repartidor..."} onChange={(e) =>
-        setFormData({ ...formData, indicaciones: e.target.value })} />
+        <FormLabel>Indicaciones para el repartidor:</FormLabel>
+        <Textarea placeholder={formData.indicaciones || "Opcionalmente puede agregarle notas a su repartidor..."} onChange={(e) =>
+          setFormData({ ...formData, indicaciones: e.target.value })} />
       </Stack>
     </Box>
   )
 }
 const SelectorDireccion = ({ formData, setFormData }) => {
   return (
-    <Select placeholder={formData.ciudad || "Seleccione"} size='sm' onChange={(e) =>
+    <Select borderWidth={2} placeholder={formData.ciudad || "Seleccione"} onChange={(e) =>
       setFormData({ ...formData, ciudad: e.target.value })}>
       <option value='Alta Gracia'> Alta Gracia</option>
       <option value='Córdoba'>Córdoba</option>

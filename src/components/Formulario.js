@@ -1,12 +1,12 @@
-import { Button, Heading, Stack, Box } from '@chakra-ui/react';
+import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
+import BarraDeProgreso from './BarraDeProgreso';
+import Carrito from './Carrito';
 import Direccion from './Direccion';
 import Hora from './Hora';
 import Pago from './Pago';
-import BarraDeProgreso from './BarraDeProgreso';
 import ResumenDeTransaccion from './ResumenDeTransaccion';
-import Carrito from './Carrito';
-import Swal from 'sweetalert2';
 
 function Formulario() {
 
@@ -53,21 +53,21 @@ function Formulario() {
     fecha: "",
   });
   function noAvanzar(page) {
-    switch(page) {
+    switch (page) {
       case 0:
         return items.length === 0;
       case 1:
-         return (formData.calle === "" || formData.calle === "" || formData.ciudad === "");
+        return (formData.calle === "" || formData.calle === "" || formData.ciudad === "");
       case 2:
-         return (formData.formaDePago === 'efectivo' && formData.cantidadEfectivo === '') ||
-                (formData.formaDePago === 'tarjeta' && (formData.numeroTarjeta.length != 19 || formData.fechaVen === '' || formData.codSeg.length != 3 )) ||
-                formData.formaDePago ===''
+        return (formData.formaDePago === 'efectivo' && formData.cantidadEfectivo === '') ||
+          (formData.formaDePago === 'tarjeta' && (formData.numeroTarjeta.length != 19 || formData.fechaVen === '' || formData.codSeg.length != 3)) ||
+          formData.formaDePago === ''
       case 3:
-         return (formData.antesPosible === '' && formData.fecha === '') ||
-                (formData.antesPosible === 'NO' && formData.fecha === '')  ;
+        return (formData.antesPosible === '' && formData.fecha === '') ||
+          (formData.antesPosible === 'NO' && formData.fecha === '');
       default:
-         return false
-                       }
+        return false
+    }
   }
 
   const PageDisplay = () => {
@@ -77,7 +77,7 @@ function Formulario() {
       case 1:
         return <Direccion formData={formData} setFormData={setFormData} />
       case 2:
-        return <Pago formData={formData} setFormData={setFormData}/>
+        return <Pago formData={formData} setFormData={setFormData} />
       case 3:
         return <Hora formData={formData} setFormData={setFormData} />
       case 4:
@@ -98,21 +98,22 @@ function Formulario() {
         </Box>
         <Box mx='10' my='7' className='footer'>
           <Stack my='4' isInline justifyContent='space-between'>
-            <Button
+            <Button size='lg' p='3' colorScheme="blue"
               disabled={page === 0}
               onClick={() => {
                 setPage((currPage) => page === 0 ? currPage : currPage - 1);
               }}
             >Volver</Button>
             <Stack isInline>
-              <Button align='end' colorScheme='red'
+              <Button size='lg' p='3' align='end' colorScheme='red'
                 onClick={() => {
                   cancelarPedido();
                 }}
               >
-                Cancelar pedido
+                <Text> Cancelar <br></br>pedido
+                </Text>
               </Button>
-              <Button align='end' colorScheme='green'
+              <Button size='lg' p='3' align='end' colorScheme='green'
                 onClick={() => {
                   if (page === FormTitles.length - 1) {
                     confirmarPedido();
@@ -121,8 +122,8 @@ function Formulario() {
                     setPage((currPage) => currPage + 1);
                   }
                 }}
-                isDisabled = {noAvanzar(page)}
-                
+                isDisabled={noAvanzar(page)}
+
               >
                 {page === FormTitles.length - 1 ? "Confirmar Pedido" : "Siguiente"}
               </Button>

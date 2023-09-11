@@ -1,5 +1,5 @@
+import { Box, Button, Heading, List, ListItem, SimpleGrid, Stack, Text, VStack } from '@chakra-ui/react';
 import React, { useState } from "react";
-import { Box, Flex, SimpleGrid, List, ListItem, Heading, Text, Stack, VStack, Button } from '@chakra-ui/react';
 import Item from "./Item";
 
 function Carrito({ items, setItems }) {
@@ -37,7 +37,7 @@ function Carrito({ items, setItems }) {
                 ))}
 
             </SimpleGrid>
-            <VStack align='center' w='100%'>
+            <VStack align='end' w='100%'>
                 <Box boxShadow='dark-lg' textAlign='left' borderWidth={1} borderRadius='lg' m={4} p={4} w='40%' >
                     <Heading textAlign='center' size='sm' m={3}>Resumen de pedidos</Heading>
                     <List spacing={3} >
@@ -57,7 +57,7 @@ function Carrito({ items, setItems }) {
                     </List>
                 </Box>
 
-                <Button align='end' colorScheme='blue'
+                <Button m='4' align='end' colorScheme='blue'
                     onClick={() => {
                         vaciarLista();
                     }}
