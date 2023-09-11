@@ -52,9 +52,23 @@ function Formulario() {
     antesPosible: "",
     fecha: "",
   });
-
-  const [tarjetaValida, setTarjetaValida] = useState(false);
-  const [tipoDeTarjeta, setTipoDeTarjeta] = useState('Desconocido');
+  function noAvanzar(page) {
+    switch(page) {
+      case 0:
+        return items.length === 0;
+      case 1:
+         return (formData.calle === "" || formData.calle === "" || formData.ciudad === "");
+      case 2:
+         return (formData.formaDePago === 'efectivo' && formData.cantidadEfectivo === '') ||
+                (formData.formaDePago === 'tarjeta' && (formData.numeroTarjeta.length != 16 || formData.fechaVen === '' || formData.codSeg.length != 3 )) ||
+                formData.formaDePago ===''
+      case 3:
+         return (formData.antesPosible === '' && formData.fecha === '') ||
+                (formData.antesPosible === 'NO' && formData.fecha === '')  ;
+      default:
+         return false
+                       }
+  }
 
   const PageDisplay = () => {
     switch (page) {
@@ -107,9 +121,7 @@ function Formulario() {
                     setPage((currPage) => currPage + 1);
                   }
                 }}
-                isDisabled = {(page === 1 && (formData.calle === '' || formData.numero === '' || formData.ciudad === '')) 
-                || page === 2 && (formData.formaDePago === '' || formData.formaDePago === 'efectivo' && formData.cantidadEfectivo === '' 
-                || (formData.formaDePago === 'tarjeta' && (formData.numeroTarjeta.length != 16 || formData.fechaVen === '' || formData.codSeg.length != 3 )))}
+                isDisabled = {(noAvanzar)}
                 
               >
                 {page === FormTitles.length - 1 ? "Confirmar Pedido" : "Siguiente"}
