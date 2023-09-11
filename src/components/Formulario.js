@@ -53,6 +53,9 @@ function Formulario() {
     fecha: "",
   });
 
+  const [tarjetaValida, setTarjetaValida] = useState(false);
+  const [tipoDeTarjeta, setTipoDeTarjeta] = useState('Desconocido');
+
   const PageDisplay = () => {
     switch (page) {
       case 0:
@@ -60,7 +63,7 @@ function Formulario() {
       case 1:
         return <Direccion formData={formData} setFormData={setFormData} />
       case 2:
-        return <Pago formData={formData} setFormData={setFormData} />
+        return <Pago formData={formData} setFormData={setFormData}/>
       case 3:
         return <Hora formData={formData} setFormData={setFormData} />
       case 4:
@@ -106,7 +109,7 @@ function Formulario() {
                 }}
                 isDisabled = {(page === 1 && (formData.calle === '' || formData.numero === '' || formData.ciudad === '')) 
                 || page === 2 && (formData.formaDePago === '' || formData.formaDePago === 'efectivo' && formData.cantidadEfectivo === '' 
-                || (formData.formaDePago === 'tarjeta' && (formData.numeroTarjeta === '' || formData.fechaVen === '' || formData.codSeg === '')))}
+                || (formData.formaDePago === 'tarjeta' && (formData.numeroTarjeta.length != 16 || formData.fechaVen === '' || formData.codSeg.length != 3 )))}
                 
               >
                 {page === FormTitles.length - 1 ? "Confirmar Pedido" : "Siguiente"}
