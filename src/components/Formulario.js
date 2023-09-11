@@ -86,7 +86,7 @@ function Formulario() {
   }
   return (
     <div className='form'>
-      <Box mx='20' my='7' className='progressbar'>
+      <Box mx='10%' my='7' className='progressbar'>
         <BarraDeProgreso page={page} titulos={FormTitles} />
       </Box>
       <div className='form-container'>

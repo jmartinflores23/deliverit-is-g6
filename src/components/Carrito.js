@@ -24,7 +24,7 @@ function Carrito({ items, setItems }) {
 
     return (
         <div p='4'>
-            <SimpleGrid p='4' minChildWidth='120px' spacing={3} w='100%'>
+            <SimpleGrid p='4' minChildWidth='150px' spacing={3} w='100%'>
 
                 {listaItems.map((item, index) => (
                     <Item

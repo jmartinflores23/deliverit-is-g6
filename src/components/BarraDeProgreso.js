@@ -1,48 +1,50 @@
 import React from 'react'
-import { ProgressBar, Step } from "react-step-progress-bar";
+import { ProgressBar, Step, } from "react-step-progress-bar";
 import "react-step-progress-bar/styles.css";
 import "./BarraDeProgreso.css";
+import { MdShoppingCart, MdHouse, MdAttachMoney, MdAccessTime, MdOutlineEditNote } from "react-icons/md";
+import { Icon } from '@chakra-ui/react';
+
+
 
 function BarraDeProgreso({ page, titulos }) {
-
-
   return (
     <ProgressBar
       percent={page * 25}
       filledBackground="linear-gradient(to right, #e381c9, #e31bae)"
     >
-      <Step transition="scale">
+      <Step transition="scale" >
         {({ accomplished, page, titulos }) => (
           <div className={`step ${accomplished ? "completed" : ""}`}>
-            Carrito
+            <Icon as={MdShoppingCart} boxSize={12} />
           </div>
         )}
       </Step>
       <Step transition="scale">
         {({ accomplished, page, titulos }) => (
           <div className={`step ${accomplished ? "completed" : ""}`}>
-            Direccion
+             <Icon as={MdHouse} boxSize={12} />
           </div>
         )}
       </Step>
       <Step transition="scale">
         {({ accomplished, page, titulos }) => (
           <div className={`step ${accomplished ? "completed" : ""}`}>
-            Forma de Pago
+             <Icon as={MdAttachMoney} boxSize={12} />
           </div>
         )}
       </Step>
       <Step transition="scale">
         {({ accomplished, page, titulos }) => (
           <div className={`step ${accomplished ? "completed" : ""}`}>
-            Horario
+             <Icon as={MdAccessTime} boxSize={12} />
           </div>
         )}
       </Step>
       <Step transition="scale">
         {({ accomplished, page, titulos }) => (
           <div className={`step ${accomplished ? "completed" : ""}`}>
-            Resumen
+             <Icon as={MdOutlineEditNote} boxSize={12} />
           </div>
         )}
       </Step>
