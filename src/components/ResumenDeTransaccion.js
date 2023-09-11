@@ -4,7 +4,22 @@ import { MdCheckCircle } from "react-icons/md";
 function ResumenDeTransaccion({ formData, setPage }) {
     const capitalizeFirst = str => {
         return str.charAt(0).toUpperCase() + str.slice(1);
-      };
+    };
+
+    function formatearFecha(fecha) {
+        const options = {
+            day: '2-digit',
+            month: '2-digit',
+            year: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+        };
+
+        const fechaFormateada = new Date(fecha).toLocaleDateString('es-AR', options);
+
+        return fechaFormateada;
+    }
+    const fechaFormateada = formatearFecha(formData.fecha);
 
     return (
         <Flex justifyContent='center'>
@@ -14,10 +29,11 @@ function ResumenDeTransaccion({ formData, setPage }) {
                         <ListItem isInline>
                             <ListIcon as={MdCheckCircle} color='green.500' />
                             Dirección:
-                            <Text fontSize='sm'>{formData.ciudad}, {formData.calle} {formData.numero}</Text>
+                            <br />
+                            <Text as='i' fontSize='sm'>{formData.ciudad || 'null'} - {formData.calle || 'null'} {formData.numero || 'null'}</Text>
                         </ListItem>
                         <Button colorScheme='pink' size='xs' onClick={() => {
-                            setPage(0);
+                            setPage(1);
                         }}>Editar</Button>
 
                     </Stack>
@@ -26,19 +42,8 @@ function ResumenDeTransaccion({ formData, setPage }) {
                         <ListItem isInline>
                             <ListIcon as={MdCheckCircle} color='green.500' />
                             Indicaciones al repartidor:
-                            <Text fontSize='sm'>{formData.indicaciones}</Text>
-                        </ListItem>
-                        <Button colorScheme='pink' size='xs' onClick={() => {
-                            setPage(0);
-                        }}>Editar</Button>
-
-                    </Stack>
-                    <Divider />
-                    <Stack isInline justifyContent='space-between' align='center'>
-                        <ListItem>
-                            <ListIcon as={MdCheckCircle} color='green.500' />
-                            Forma de pago
-                            <Text fontSize='sm'> {capitalizeFirst(formData.formaDePago)}, {formData.cantidadEfectivo}, {formData.numeroTarjeta}, {formData.fechaVen}, {formData.codSeg}</Text>
+                            <br />
+                            <Text as='i' fontSize='sm'>{formData.indicaciones || 'null'}</Text>
                         </ListItem>
                         <Button colorScheme='pink' size='xs' onClick={() => {
                             setPage(1);
@@ -49,11 +54,25 @@ function ResumenDeTransaccion({ formData, setPage }) {
                     <Stack isInline justifyContent='space-between' align='center'>
                         <ListItem>
                             <ListIcon as={MdCheckCircle} color='green.500' />
-                            Horario de entrega
-                            <Text fontsize='sm'> Lo antes posible: {formData.antesPosible}</Text>
+                            Forma de pago:
+                            <br />
+                            <Text as='i' fontSize='sm'> {capitalizeFirst(formData.formaDePago)}{formData.formaDePago === 'efectivo' ? ` - Entrega: $ ${formData.cantidadEfectivo || 'null'}` : ''}</Text>
                         </ListItem>
                         <Button colorScheme='pink' size='xs' onClick={() => {
                             setPage(2);
+                        }}>Editar</Button>
+
+                    </Stack>
+                    <Divider />
+                    <Stack isInline justifyContent='space-between' align='center'>
+                        <ListItem>
+                            <ListIcon as={MdCheckCircle} color='green.500' />
+                            Horario de entrega
+                            <br />
+                            <Text as='i' fontsize='sm'> {formData.antesPosible === 'SI' ? `Lo antes posible` : formData.antesPosible === 'NO' ? `Diferido: ${fechaFormateada}` : `null`}</Text>
+                        </ListItem>
+                        <Button colorScheme='pink' size='xs' onClick={() => {
+                            setPage(3);
                         }}>Editar</Button>
                     </Stack>
                 </List>

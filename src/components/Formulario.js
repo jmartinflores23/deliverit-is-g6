@@ -51,7 +51,6 @@ function Formulario() {
     codSeg: "",
     antesPosible: "",
     fecha: "",
-    hora: "",
   });
 
   const PageDisplay = () => {
