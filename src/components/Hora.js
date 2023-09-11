@@ -21,7 +21,7 @@ const Opciones = ({ formData, setFormData }) => {
 
   return (
     <Box my='5' textAlign='left' boxShadow='dark-lg' borderWidth={1} borderRadius='lg' p={7} width='full'>
-      <Text>SELECCIONAR FORMA DE ENVIO:</Text>
+      <Text>Seleccionar Forma de Envío:</Text>
       <Center height='50px'>
         <RadioGroup onChange={setValue} value={value}>
           <Stack direction='row'>

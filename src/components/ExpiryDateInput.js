@@ -45,7 +45,7 @@ function ExpiryDateInput({ formFecha, setFormFecha }) {
         type='text'
         value={formFecha.fechaVen || ''}
         size='sm' 
-        placeholder={formFecha.fechaVen || "MM/AA"} onChange={(e) =>
+        placeholder={formFecha.fechaVen || " MM/AA"} onChange={(e) =>
          handleExpiryDateChange && setFormFecha({ ...formFecha, fechaVen: e.target.value })}
         as={InputMask} maskChar={null} mask="99/99"
          />
