@@ -23,8 +23,8 @@ function Carrito({ items, setItems }) {
     setItems(listaItems);
 
     return (
-        <Flex p='4'>
-            <SimpleGrid p='4' columns={5} spacing={3} w='100%'>
+        <div p='4'>
+            <SimpleGrid p='4' minChildWidth='120px' spacing={3} w='100%'>
 
                 {listaItems.map((item, index) => (
                     <Item
@@ -37,8 +37,8 @@ function Carrito({ items, setItems }) {
                 ))}
 
             </SimpleGrid>
-            <VStack align='end' w='55%'>
-                <Box boxShadow='dark-lg' textAlign='left' borderWidth={1} borderRadius='lg' m={4} p={4} w='80%' >
+            <VStack align='center' w='100%'>
+                <Box boxShadow='dark-lg' textAlign='left' borderWidth={1} borderRadius='lg' m={4} p={4} w='40%' >
                     <Heading textAlign='center' size='sm' m={3}>Resumen de pedidos</Heading>
                     <List spacing={3} >
                         <ListItem>
@@ -67,7 +67,7 @@ function Carrito({ items, setItems }) {
                 </Button>
 
             </VStack>
-        </Flex>
+        </div>
 
 
 

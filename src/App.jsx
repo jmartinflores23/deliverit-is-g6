@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Box bg='lightgray' w='100%' p={4} color='black' marginBottom='20' /* borderWidth='0.5em' borderColor='black' */>
         <Icon as={GiKnifeFork} boxSize={12} />
-        <Heading display='inline' size='4xl' fontFamily='Merriwheater'>  DeliverIT!</Heading>
+        <Heading display='inline' size='4xl' fontFamily='Merriwheater'>  DeliverEat!</Heading>
       </Box>
       <Formulario/>
     </div>

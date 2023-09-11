@@ -52,7 +52,7 @@ function Pago({ formData, setFormData,}) {
         <Stack p={4} alignItems="center" justifyContent="center" marginBottom='234px'>
           {formData.formaDePago === 'efectivo' &&
             <Stack>
-              <Text>INDIQUE CON CUANTO VA A ABONAR</Text>
+              <Text>Con cuanto va abonar?</Text>
               <Input type='number' placeholder={formData.cantidadEfectivo || "$ Monto a abonar"} onChange={(e) =>
               handleChange && setFormData({ ...formData, cantidadEfectivo: e.target.value, formaDePago: 'efectivo', numeroTarjeta: '', fechaVen: '', codSeg: '' })} variant='filled' htmlsize={5} ></Input>
             </Stack>}
@@ -78,7 +78,7 @@ function Pago({ formData, setFormData,}) {
                   setFormData({ ...formData, fechaVen: e.target.value })} type="text" />*/}
               </Stack>
               <HStack>
-                <Text>CÓD SEGURIDAD</Text> <Input placeholder={formData.codSeg || "000"} onChange={(e) =>
+                <Text>CVC:</Text> <Input placeholder={formData.codSeg || "000"} onChange={(e) =>
                   setFormData({ ...formData, codSeg: e.target.value })} type="text"
                   as={InputMask} mask='999' maskChar={null} /><br />
               </HStack>
