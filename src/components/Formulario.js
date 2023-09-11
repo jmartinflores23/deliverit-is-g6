@@ -1,4 +1,4 @@
-import { Button, Heading, Stack, Box, FormControl } from '@chakra-ui/react';
+import { Button, Heading, Stack, Box } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import Direccion from './Direccion';
 import Hora from './Hora';
@@ -60,7 +60,7 @@ function Formulario() {
          return (formData.calle === "" || formData.calle === "" || formData.ciudad === "");
       case 2:
          return (formData.formaDePago === 'efectivo' && formData.cantidadEfectivo === '') ||
-                (formData.formaDePago === 'tarjeta' && (formData.numeroTarjeta === '' || formData.fechaVen === '' || formData.codSeg === '')) ||
+                (formData.formaDePago === 'tarjeta' && (formData.numeroTarjeta.length != 16 || formData.fechaVen === '' || formData.codSeg.length != 3 )) ||
                 formData.formaDePago ===''
       case 3:
          return (formData.antesPosible === '' && formData.fecha === '') ||
@@ -77,7 +77,7 @@ function Formulario() {
       case 1:
         return <Direccion formData={formData} setFormData={setFormData} />
       case 2:
-        return <Pago formData={formData} setFormData={setFormData} />
+        return <Pago formData={formData} setFormData={setFormData}/>
       case 3:
         return <Hora formData={formData} setFormData={setFormData} />
       case 4:
@@ -85,7 +85,7 @@ function Formulario() {
     }
   }
   return (
-    <FormControl className='form'>
+    <div className='form'>
       <Box mx='20' my='7' className='progressbar'>
         <BarraDeProgreso page={page} titulos={FormTitles} />
       </Box>
@@ -120,9 +120,9 @@ function Formulario() {
                   } else {
                     setPage((currPage) => currPage + 1);
                   }
-
                 }}
-                isDisabled= {noAvanzar(page)}
+                isDisabled = {noAvanzar(page)}
+                
               >
                 {page === FormTitles.length - 1 ? "Confirmar Pedido" : "Siguiente"}
               </Button>
@@ -130,7 +130,7 @@ function Formulario() {
           </Stack>
         </Box>
       </div>
-    </FormControl>
+    </div>
   )
 }
 
