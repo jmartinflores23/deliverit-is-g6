@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Stack, HStack, Box, Heading, Flex, Text, Input, Radio, RadioGroup } from '@chakra-ui/react';
+import { Stack, HStack, Box, Heading, Flex, Text, Input, InputLeftElement, InputRightElement, InputGroup } from '@chakra-ui/react';
 import ExpiryDateInput from './ExpiryDateInput';
 import InputMask from "react-input-mask";
+import { CalendarIcon, UnlockIcon } from '@chakra-ui/icons';
+import { FaCcVisa, FaCcMastercard} from 'react-icons/fa'
 
 
 function Pago({ formData, setFormData,}) {
@@ -17,11 +19,9 @@ function Pago({ formData, setFormData,}) {
     const firstDigit = parseInt(numeroTarjeta.charAt(0));
   
     if (firstDigit === 4) {
-      return 'Visa';
+      return <FaCcVisa size='3em'/>;
     } else if (firstDigit === 5) {
-      return 'Mastercard';
-    } else {
-      return 'Desconocido';
+      return <FaCcMastercard size='3em'/>;
     }
   }
 
@@ -35,32 +35,40 @@ function Pago({ formData, setFormData,}) {
   return (
 
     <Box textAlign='center' >
-      <Stack isInline justifyContent='center'>
-        <Flex direction='column' mr={300}>
+      <Stack justifyContent='center'>
+        <Flex direction='column'>
           <label>
             <input type="radio" value="efectivo" checked={formData.formaDePago === 'efectivo'} onChange={cambioOpcion} /> Efectivo
           </label>
         </Flex>
-        <Flex direction='column' ml={300}>
+        <Flex direction='column' >
           <label>
             <input type="radio" value="tarjeta" checked={formData.formaDePago === 'tarjeta'} onChange={cambioOpcion} /> Tarjeta
           </label>
         </Flex>
       </Stack>
-
-      <div style={{ display: "grid", gridTemplateColumns: "40% 60%" }}>
-        <Stack p={4} alignItems="center" justifyContent="center" marginBottom='234px'>
+        <Stack p={4} alignItems="center" justifyContent="center" >
           {formData.formaDePago === 'efectivo' &&
-            <Stack>
+            <Stack boxShadow='dark-lg' borderWidth={1} borderRadius='lg' p='7'>
               <Text>Con cuanto va abonar?</Text>
-              <Input type='number' placeholder={formData.cantidadEfectivo || "$ Monto a abonar"} onChange={(e) =>
-              handleChange && setFormData({ ...formData, cantidadEfectivo: e.target.value, formaDePago: 'efectivo', numeroTarjeta: '', fechaVen: '', codSeg: '' })} variant='filled' htmlsize={5} ></Input>
+              <InputGroup>
+              <InputLeftElement pointerEvents='none' color='gray.500' fontSize='1.2em' children='$'/>
+                <Input type='number' placeholder={formData.cantidadEfectivo || "Monto a abonar"} onChange={(e) =>
+                handleChange && setFormData({ ...formData, cantidadEfectivo: e.target.value, formaDePago: 'efectivo', numeroTarjeta: '', fechaVen: '', codSeg: '' })} variant='filled' htmlsize={5} ></Input>
+              </InputGroup>
             </Stack>}
-        </Stack>
-        <Stack p={4} alignItems="center">
           {formData.formaDePago === 'tarjeta' &&
             <Stack my='5' textAlign='left' boxShadow='dark-lg' borderWidth={1} borderRadius='lg' p={7}>
-              <Stack isInline>
+              <Text textAlign='center'>Ingrese los datos de la Tarjeta</Text>
+              <HStack>
+                <Text> Nombre y Apellido</Text> 
+                <Input size='sm' type='text' placeholder={formData.nombreTitular || "Ingrese nombre del titular"}
+                  onChange={(e) => {
+                  setFormData({...formData, nombreTitular: e.target.value })
+                  }} 
+                  />
+              </HStack>
+              <HStack>
                 <Text>N° Tarjeta </Text> 
                 <Input size='sm' type='tel' pattern='[0-9]{13,19}' placeholder={formData.numeroTarjeta || "0000-0000-0000-0000"}
                   onChange={(e) => {
@@ -69,24 +77,30 @@ function Pago({ formData, setFormData,}) {
                   determinarTipoDeTarjeta(nuevoNumeroTarjeta);}} 
                   as={InputMask} mask='9999-9999-9999-9999' maskChar={null}/>
                 <Text>{determinarTipoDeTarjeta(formData.numeroTarjeta)}</Text>
-                  <br /><br /><br />
-              </Stack>
-              <Stack isInline>
-                <Text>Caducidad: </Text>
-                <ExpiryDateInput formFecha={formData} setFormFecha={setFormData}/>
-                  {/*size='sm' placeholder={formData.fechaVen || "MM/AA"} onChange={(e) =>
-                  setFormData({ ...formData, fechaVen: e.target.value })} type="text" />*/}
-              </Stack>
+              </HStack>
               <HStack>
-                <Text>CVC:</Text> <Input placeholder={formData.codSeg || "000"} onChange={(e) =>
+                <Text>Caducidad: </Text>
+                <InputGroup>
+                <InputRightElement fontSize='1.2em'>
+                    <CalendarIcon color='gray.600'/>
+                </InputRightElement>
+                    <ExpiryDateInput formFecha={formData} setFormFecha={setFormData}/>
+                </InputGroup>
+              </HStack>
+              <HStack>
+                <Text>CVC:</Text>
+                <InputGroup>
+                <InputLeftElement fontSize='1.2em'>
+                    <UnlockIcon color='gray.600'/>
+                </InputLeftElement> 
+                <Input placeholder={formData.codSeg || "000"} onChange={(e) =>
                   setFormData({ ...formData, codSeg: e.target.value })} type="text"
-                  as={InputMask} mask='999' maskChar={null} /><br />
+                  as={InputMask} mask='999' maskChar={null} />
+                </InputGroup>
               </HStack>
 
             </Stack>}
         </Stack>
-      </div>
-
     </Box>
 
   )
