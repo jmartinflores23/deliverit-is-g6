@@ -26,11 +26,9 @@ const Opciones = ({ formData, setFormData }) => {
         <RadioGroup onChange={setValue} value={value}>
           <Stack direction='row'>
             <Radio value='1' onChange={(e) => setFormData({ ...formData, antesPosible: "SI" })}>Lo antes posible</Radio>
-
             <Divider orientation="vertical" h="50px" borderColor="gray.300" />
-
             <Radio value='2' onChange={(e) => setFormData({ ...formData, antesPosible: "NO" })}>Seleccionar fecha y hora</Radio>
-            =          </Stack>
+          </Stack>
         </RadioGroup>
       </Center>
 
@@ -41,28 +39,35 @@ const Opciones = ({ formData, setFormData }) => {
 }
 
 const SeleccionarFechaYHora = ({ formData, setFormData }) => {
-  const [selectedDate, setSelectedDate] = useState(formData.fecha);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedHour,setSelectedHour] = useState(null);
 
-  const handleDateChange = (date) => {
-    setFormData({ ...formData, fecha: date })
+  const handleDateChange = (date) => 
+  {
     setSelectedDate(date);
+  };
+  const handleHourChange = (hour) =>
+  {
+    const horas = new Date(hour).getHours();
+    const minutos = new Date(hour).getMinutes();
+
+    selectedDate.setHours(horas);
+    selectedDate.setMinutes(minutos);
+
+    formData.fecha = selectedDate;
   };
 
   return (
-    <Box align='center'>
-      <HStack borderWidth={4} borderColor='black' w='22%'>
-        <Icon as={MdCalendarMonth} color='black.500' />
-        <DatePicker
-          selected={selectedDate}
-          onChange={handleDateChange}
-          showTimeSelect
-          timeFormat="HH:mm"
-          timeIntervals={15}
-          timeCaption="Hora"
-          dateFormat="yyyy-MM-dd HH:mm"
-          className="date-time-picker"
-        />
-      </HStack>
+    <Box>
+      <Stack direction='row'>
+        <Text>Fecha: </Text>
+        <DatePicker selected={selectedDate} onChange={handleDateChange} dateFormat="dd MMMM yyyy" className="date-time-picker"/>
+      </Stack>
+
+      <Stack direction='row'>
+        <Text>Hora: </Text>
+        <DatePicker selected={selectedHour} onChange={handleHourChange} showTimeSelect showTimeSelectOnly timeFormat='HH:mm' timeIntervals={15} className="date-time-picker"/>
+      </Stack>
     </Box>
   );
 
