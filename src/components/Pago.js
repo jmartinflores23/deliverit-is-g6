@@ -6,20 +6,33 @@ function Pago({ formData, setFormData }) {
   const [opcionSelecc, setOpcionSelecc] = useState('efectivo');
   const [numeroTarjeta, setNumeroTarjeta] = useState('');
 
+  const verificarTarjeta = (numeroTarjeta) => {
+    const esValido = esNumeroDeTarjetaValido(numeroTarjeta);
+    const tipoDeTarjeta = determinarTipoDeTarjeta(numeroTarjeta);
+
+    if (esValido) {
+      console.log(`La tarjeta es válida y es de tipo: ${tipoDeTarjeta}`);
+      //setTipoTarjeta(tipoDeTarjeta);
+    } else {
+      //setTipoTarjeta('');
+    }
+  
+  };
+
+  const handleChange = (e) => {
+    const nuevoNumeroTarjeta = e.target.value;
+    setNumeroTarjeta(nuevoNumeroTarjeta);
+    verificarTarjeta(nuevoNumeroTarjeta);
+  };
+
   const cambioOpcion = (event) => {
     const nuevaFormaPago = event.target.value;
     setOpcionSelecc(nuevaFormaPago);
     // Actualiza formData con la nueva formaDePago
     setFormData({ ...formData, formaDePago: nuevaFormaPago});
+    console.log(formData);
   };
 
-  // const handleExpiryDateChange = (date) => {
-  //   setExpiryDate(date);
-  //   setFormFecha({
-  //     ...formFecha,
-  //     fechaVen: date,
-  //   });
-  // };
 
   return (
 
@@ -42,8 +55,8 @@ function Pago({ formData, setFormData }) {
           {formData.formaDePago === 'efectivo' &&
             <Stack>
               <Text>INDIQUE CON CUANTO VA A ABONAR</Text>
-              <Input placeholder={formData.cantidadEfectivo || "$ Monto a abonar"} onChange={(e) =>
-                setFormData({ ...formData, cantidadEfectivo: e.target.value, formaDePago: 'efectivo', numeroTarjeta: '', fechaVen: '', codSeg: '' })} variant='filled' htmlsize={5} ></Input>
+              <Input type='number' placeholder={formData.cantidadEfectivo || "$ Monto a abonar"} onChange={(e) =>
+              handleChange && setFormData({ ...formData, cantidadEfectivo: e.target.value, formaDePago: 'efectivo', numeroTarjeta: '', fechaVen: '', codSeg: '' })} variant='filled' htmlsize={5} ></Input>
             </Stack>}
         </Stack>
         <Stack p={4} alignItems="center">
@@ -52,13 +65,14 @@ function Pago({ formData, setFormData }) {
               <Stack isInline>
                 <Text>N° Tarjeta </Text> 
                 <Input size='sm' placeholder={formData.numeroTarjeta || "0000-0000-0000-0000"}
-                  onChange={(e) => setFormData({ ...formData, numeroTarjeta: e.target.value, formaDePago: 'tarjeta', cantidadEfectivo: '' })} type="number" /><br /><br /><br />
+                  onChange={(e) => setFormData({ ...formData, numeroTarjeta: e.target.value, formaDePago: 'tarjeta', cantidadEfectivo: '' })} type="number" />
+                  <br /><br /><br />
               </Stack>
               <Stack isInline>
                 <Text>Caducidad: </Text>
-                <Input
-                  size='sm' placeholder={formData.fechaVen || "MM/AA"} onChange={(e) =>
-                   setFormData({ ...formData, fechaVen: e.target.value })} type="text" />
+                <ExpiryDateInput formFecha={formData} setFormFecha={setFormData}/>
+                  {/*size='sm' placeholder={formData.fechaVen || "MM/AA"} onChange={(e) =>
+                  setFormData({ ...formData, fechaVen: e.target.value })} type="text" />*/}
               </Stack>
               <HStack>
                 <Text>CÓD SEGURIDAD</Text> <Input placeholder={formData.codSeg || "000"} onChange={(e) =>

@@ -12,8 +12,8 @@ function ExpiryDateInput({ formFecha, setFormFecha }) {
     const inputDate = e.target.value;
     if (isValidExpiryDate(inputDate)) {
       //setExpiryDate(inputDate);
-      setFormFecha({ ...formFecha, expiryDate: inputDate });
     }
+    setFormFecha({ ...formFecha, expiryDate: inputDate });
   };
 
   const isValidExpiryDate = (dateString) => {
@@ -40,11 +40,12 @@ function ExpiryDateInput({ formFecha, setFormFecha }) {
 
   return (
     <div>
-      <input
+      <Input
         type='text'
         value={formFecha.fechaVen || ''}
         size='sm' 
-        placeholder='MM/AA'/>
+        placeholder={formFecha.fechaVen || "MM/AA"} onChange={(e) =>
+         handleExpiryDateChange && setFormFecha({ ...formFecha, fechaVen: e.target.value })}/>
       {!isValidExpiryDate(formFecha.fechaVen) && (
         <div style={{ color: 'red' }}>Ingrese una fecha válida y posterior a la actual.</div>
       )}

@@ -15,10 +15,10 @@ const DireccionBody = ({ formData, setFormData }) => {
     <Box my='5' textAlign='left' boxShadow='dark-lg' borderWidth={1} borderRadius='lg' p={7} width='full'>
       <Stack isInline justifyContent='space-between'  align='center'>
         <Text> Calle:</Text>
-        <Input size='sm' placeholder={formData.calle || "Ingrese la calle:"} onChange={(e) =>
+        <Input size='sm' type='text' placeholder={formData.calle || "Ingrese la calle:"} onChange={(e) =>
           setFormData({ ...formData, calle: e.target.value })} />
         <Text>Nº:</Text>
-        <Input size='sm' placeholder={formData.numero || "Ingrese el número:"} onChange={(e) =>
+        <Input size='sm' type='number' placeholder={formData.numero || "Ingrese el número:"} onChange={(e) =>
           setFormData({ ...formData, numero: e.target.value })} />
       </Stack>
       <Stack isInline p={3} my='4' justifyContent='space-between'  align='center'>
