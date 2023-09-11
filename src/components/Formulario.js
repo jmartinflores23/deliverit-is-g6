@@ -103,7 +103,9 @@ function Formulario() {
                   } else {
                     setPage((currPage) => currPage + 1);
                   }
+
                 }}
+                isDisabled= {page===1 && (formData.calle === "" || formData.calle === "" || formData.ciudad === "")} 
               >
                 {page === FormTitles.length - 1 ? "Confirmar Pedido" : "Siguiente"}
               </Button>
