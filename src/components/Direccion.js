@@ -25,12 +25,15 @@ const DireccionBody = ({ formData, setFormData }) => {
         
       </Stack>
       <Stack isInline p={3} my='4' justifyContent='space-between'  align='center'>
-        <Text>Ciudad:</Text>
+        <FormLabel>Ciudad:</FormLabel>
         <SelectorDireccion formData={formData} setFormData={setFormData} />
       </Stack>
-      <Text>Indicaciones para el repartidor:</Text>
+
+      <Stack>
+      <FormLabel>Indicaciones para el repartidor:</FormLabel>
       <Textarea placeholder={formData.indicaciones || "Opcionalmente puede agregarle notas a su repartidor..."} onChange={(e) =>
         setFormData({ ...formData, indicaciones: e.target.value })} />
+      </Stack>
     </Box>
   )
 }
