@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Stack, HStack, Box, Heading, Flex, Text, Input, Radio, RadioGroup } from '@chakra-ui/react';
 import ExpiryDateInput from './ExpiryDateInput';
+import InputMask from "react-input-mask";
+
 
 function Pago({ formData, setFormData,}) {
   const [opcionSelecc, setOpcionSelecc] = useState('efectivo');
@@ -64,7 +66,8 @@ function Pago({ formData, setFormData,}) {
                   onChange={(e) => {
                   const nuevoNumeroTarjeta = e.target.value;
                   setFormData({ ...formData, numeroTarjeta: e.target.value, formaDePago: 'tarjeta', cantidadEfectivo: '' })
-                  determinarTipoDeTarjeta(nuevoNumeroTarjeta);}} />
+                  determinarTipoDeTarjeta(nuevoNumeroTarjeta);}} 
+                  as={InputMask} mask='9999-9999-9999-9999' maskChar={null}/>
                 <Text>{determinarTipoDeTarjeta(formData.numeroTarjeta)}</Text>
                   <br /><br /><br />
               </Stack>
@@ -76,7 +79,8 @@ function Pago({ formData, setFormData,}) {
               </Stack>
               <HStack>
                 <Text>CÓD SEGURIDAD</Text> <Input placeholder={formData.codSeg || "000"} onChange={(e) =>
-                  setFormData({ ...formData, codSeg: e.target.value })} type="number" /><br />
+                  setFormData({ ...formData, codSeg: e.target.value })} type="text"
+                  as={InputMask} mask='999' maskChar={null} /><br />
               </HStack>
 
             </Stack>}
