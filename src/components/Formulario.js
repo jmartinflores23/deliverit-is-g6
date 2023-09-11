@@ -46,6 +46,7 @@ function Formulario() {
     indicaciones: "",
     formaDePago: "",
     cantidadEfectivo: "",
+    nombreTitular: "",
     numeroTarjeta: "",
     fechaVen: "",
     codSeg: "",
@@ -60,7 +61,7 @@ function Formulario() {
          return (formData.calle === "" || formData.calle === "" || formData.ciudad === "");
       case 2:
          return (formData.formaDePago === 'efectivo' && formData.cantidadEfectivo === '') ||
-                (formData.formaDePago === 'tarjeta' && (formData.numeroTarjeta.length != 19 || formData.fechaVen === '' || formData.codSeg.length != 3 )) ||
+                (formData.formaDePago === 'tarjeta' && (formData.numeroTarjeta.length != 19 || parseInt(formData.numeroTarjeta.charAt(0)) != 4 || formData.fechaVen === '' || formData.nombreTitular === '' || formData.codSeg.length != 3 )) ||
                 formData.formaDePago ===''
       case 3:
          return (formData.antesPosible === '' && formData.fecha === '') ||
