@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select, Stack, Box, Heading, Flex, Text, Input, Textarea, } from '@chakra-ui/react';
+import { Select, Stack, Box, Heading, Flex, Text, Input, Textarea, FormLabel, } from '@chakra-ui/react';
 
 function Direccion({ formData, setFormData }) {
   return (
@@ -13,21 +13,27 @@ function Direccion({ formData, setFormData }) {
 const DireccionBody = ({ formData, setFormData }) => {
   return (
     <Box my='5' textAlign='left' boxShadow='dark-lg' borderWidth={1} borderRadius='lg' p={7} width='full'>
-      <Stack isInline justifyContent='space-between'  align='center'>
-        <Text> Calle:</Text>
-        <Input size='sm' placeholder={formData.calle || "Ingrese la calle:"} onChange={(e) =>
-          setFormData({ ...formData, calle: e.target.value })} />
-        <Text>Nº:</Text>
-        <Input size='sm' placeholder={formData.numero || "Ingrese el número:"} onChange={(e) =>
-          setFormData({ ...formData, numero: e.target.value })} />
-      </Stack>
+        <Stack isInline justifyContent='space-between'  align='center'>
+          <FormLabel> Calle:</FormLabel>
+          <Input size='sm' placeholder={formData.calle || "Ingrese la calle:"}  
+            onChange={(e) =>
+              setFormData({ ...formData, calle: e.target.value })} />
+          <FormLabel>Nº:</FormLabel>
+          <Input size='sm' placeholder={formData.numero || "Ingrese el número:"} onChange={(e) =>
+            setFormData({ ...formData, numero: e.target.value })} />
+        </Stack>
+      
+      
       <Stack isInline p={3} my='4' justifyContent='space-between'  align='center'>
-        <Text>Ciudad:</Text>
+        <FormLabel>Ciudad:</FormLabel>
         <SelectorDireccion formData={formData} setFormData={setFormData} />
       </Stack>
-      <Text>Indicaciones para el repartidor:</Text>
+
+      <Stack>
+      <FormLabel>Indicaciones para el repartidor:</FormLabel>
       <Textarea placeholder={formData.indicaciones || "Opcionalmente puede agregarle notas a su repartidor..."} onChange={(e) =>
         setFormData({ ...formData, indicaciones: e.target.value })} />
+      </Stack>
     </Box>
   )
 }

@@ -1,4 +1,4 @@
-import { Button, Heading, Stack, Box } from '@chakra-ui/react';
+import { Button, Heading, Stack, Box, FormControl } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import Direccion from './Direccion';
 import Hora from './Hora';
@@ -52,6 +52,23 @@ function Formulario() {
     antesPosible: "",
     fecha: "",
   });
+  function noAvanzar(page) {
+    switch(page) {
+      case 0:
+        return items.length === 0;
+      case 1:
+         return (formData.calle === "" || formData.calle === "" || formData.ciudad === "");
+      case 2:
+         return (formData.formaDePago === 'efectivo' && formData.cantidadEfectivo === '') ||
+                (formData.formaDePago === 'tarjeta' && (formData.numeroTarjeta === '' || formData.fechaVen === '' || formData.codSeg === '')) ||
+                formData.formaDePago ===''
+      case 3:
+         return (formData.antesPosible === '' && formData.fecha === '') ||
+                (formData.antesPosible === 'NO' && formData.fecha === '')  ;
+      default:
+         return false
+                       }
+  }
 
   const PageDisplay = () => {
     switch (page) {
@@ -68,7 +85,7 @@ function Formulario() {
     }
   }
   return (
-    <div className='form'>
+    <FormControl className='form'>
       <Box mx='20' my='7' className='progressbar'>
         <BarraDeProgreso page={page} titulos={FormTitles} />
       </Box>
@@ -105,7 +122,7 @@ function Formulario() {
                   }
 
                 }}
-                isDisabled= {page===1 && (formData.calle === "" || formData.calle === "" || formData.ciudad === "")} 
+                isDisabled= {noAvanzar(page)}
               >
                 {page === FormTitles.length - 1 ? "Confirmar Pedido" : "Siguiente"}
               </Button>
@@ -113,7 +130,7 @@ function Formulario() {
           </Stack>
         </Box>
       </div>
-    </div>
+    </FormControl>
   )
 }
 
