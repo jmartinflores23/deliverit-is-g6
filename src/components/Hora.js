@@ -2,14 +2,12 @@ import React, { useState } from 'react'
 import DatePicker from 'react-datepicker';
 import { MdCalendarMonth } from "react-icons/md";
 import 'react-datepicker/dist/react-datepicker.css';
-import { Flex, Box, Text, Icon, Stack, Radio, RadioGroup, Center, Divider, HStack } from '@chakra-ui/react'
+import { Flex, Box, Text, FormLabel, SimpleGrid, Stack, Radio, RadioGroup, Center, Divider, HStack } from '@chakra-ui/react'
 
 function Hora({ formData, setFormData }) {
   return (
-    <Flex width='full' align='left' justifyContent='center'>
-      <Box textAlign='center' w='75%' >
-        <Opciones formData={formData} setFormData={setFormData} />
-      </Box>
+    <Flex justifyContent='center' textAlign='center'  >
+      <Opciones formData={formData} setFormData={setFormData} />
     </Flex>
   )
 }
@@ -20,7 +18,7 @@ const Opciones = ({ formData, setFormData }) => {
   const ComponenteSeleccionado = value === '1' ? <LoAntesPosible /> : value === '2' ? <SeleccionarFechaYHora formData={formData} setFormData={setFormData} /> : '';
 
   return (
-    <Box my='5' textAlign='left' boxShadow='dark-lg' borderWidth={1} borderRadius='lg' p={7} width='full'>
+    <Box my='5' textAlign='left' boxShadow='dark-lg' borderWidth={1} borderRadius='lg' p={5} w='75%'>
       <Text>Seleccionar Forma de Envío:</Text>
       <Center height='50px'>
         <RadioGroup onChange={setValue} value={value}>
@@ -39,36 +37,66 @@ const Opciones = ({ formData, setFormData }) => {
 }
 
 const SeleccionarFechaYHora = ({ formData, setFormData }) => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedHour,setSelectedHour] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(formData.fecha);
+  const [selectedHour, setSelectedHour] = useState(formData.fecha);
 
-  const handleDateChange = (date) => 
-  {
+  const handleDateChange = (date) => {
     setSelectedDate(date);
+    if (selectedHour) {
+      selectedHour.setTime(date)
+
+      setFormData({ ...formData, fecha: selectedHour })
+    }
+
   };
-  const handleHourChange = (hour) =>
-  {
-    const horas = new Date(hour).getHours();
-    const minutos = new Date(hour).getMinutes();
+  const handleHourChange = (hour) => {
+    setSelectedHour(hour);
+    if (selectedDate) {
+      const horas = hour.getHours();
+      const minutos = hour.getMinutes();
 
-    selectedDate.setHours(horas);
-    selectedDate.setMinutes(minutos);
+      selectedDate.setHours(horas);
+      selectedDate.setMinutes(minutos);
 
-    formData.fecha = selectedDate;
+      setFormData({ ...formData, fecha: selectedDate })
+    }
+
   };
 
   return (
-    <Box>
-      <Stack direction='row'>
-        <Text>Fecha: </Text>
-        <DatePicker selected={selectedDate} onChange={handleDateChange} dateFormat="dd MMMM yyyy" className="date-time-picker"/>
-      </Stack>
+    <SimpleGrid p='3' minChildWidth='120px' spacing={1}>
 
-      <Stack direction='row'>
-        <Text>Hora: </Text>
-        <DatePicker selected={selectedHour} onChange={handleHourChange} showTimeSelect showTimeSelectOnly timeFormat='HH:mm' timeIntervals={15} className="date-time-picker"/>
-      </Stack>
-    </Box>
+      <Box m='1'>
+        <FormLabel>Fecha: </FormLabel>
+        <Box borderWidth={2} borderRadius='lg' w='190px' p='1'>
+          <DatePicker
+            selected={selectedDate}
+            onChange={handleDateChange}
+            dateFormat="dd/MM/yyyy"
+            placeholderText="Seleccione fecha"
+            className="date-time-picker" />
+        </Box>
+
+      </Box>
+
+
+      <Box m='1'>
+        <FormLabel>Hora:  </FormLabel>
+        <Box borderWidth={2} borderRadius='lg' w='190px' p='1'>
+          <DatePicker
+            selected={selectedHour}
+            onChange={handleHourChange}
+            showTimeSelect
+            showTimeSelectOnly
+            placeholderText="Seleccione hora"
+            dateFormat='HH:mm'
+            timeIntervals={15}
+            timeCaption="Time"
+            className="date-time-picker" />
+        </Box>
+
+      </Box>
+    </SimpleGrid>
   );
 
 }
