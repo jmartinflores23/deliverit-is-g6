@@ -60,9 +60,9 @@ function Formulario() {
       case 1:
         return (formData.calle === "" || formData.calle === "" || formData.ciudad === "");
       case 2:
-         return (formData.formaDePago === 'efectivo' && formData.cantidadEfectivo === '') ||
-                (formData.formaDePago === 'tarjeta' && (formData.numeroTarjeta.length != 19 || parseInt(formData.numeroTarjeta.charAt(0)) != 4 || formData.fechaVen === '' || formData.nombreTitular === '' || formData.codSeg.length != 3 )) ||
-                formData.formaDePago ===''
+        return (formData.formaDePago === 'efectivo' && formData.cantidadEfectivo === '') ||
+          (formData.formaDePago === 'tarjeta' && (formData.numeroTarjeta.length != 19 || parseInt(formData.numeroTarjeta.charAt(0)) != 4 || formData.fechaVen === '' || formData.nombreTitular === '' || formData.codSeg.length != 3)) ||
+          formData.formaDePago === ''
       case 3:
         return (formData.antesPosible === '' && formData.fecha === '') ||
           (formData.antesPosible === 'NO' && formData.fecha === '');
@@ -99,7 +99,7 @@ function Formulario() {
         </Box>
         <Box mx='10' my='7' className='footer'>
           <Stack my='4' isInline justifyContent='space-between'>
-            <Button size='lg' p='3' colorScheme="blue"
+            <Button size='lg' p='3' colorScheme="pink"
               disabled={page === 0}
               onClick={() => {
                 setPage((currPage) => page === 0 ? currPage : currPage - 1);
@@ -126,7 +126,14 @@ function Formulario() {
                 isDisabled={noAvanzar(page)}
 
               >
-                {page === FormTitles.length - 1 ? "Confirmar Pedido" : "Siguiente"}
+                <div>
+                  {page === FormTitles.length - 1 ? (
+                    <span dangerouslySetInnerHTML={{ __html: "Confirmar<br />Pedido" }} />
+                  ) : (
+                    "Siguiente"
+                  )}
+                </div>
+
               </Button>
             </Stack>
           </Stack>
@@ -141,8 +148,10 @@ const confirmarPedido = () => {
     title: '¿Confirmar pedido?',
     text: '¿Estás seguro de que deseas confirmar este pedido?',
     icon: 'question',
+    iconColor: 'pink',
     showCancelButton: true,
     confirmButtonText: 'Sí, confirmar',
+    confirmButtonColor: 'green',
     cancelButtonText: 'Cancelar',
   }).then((result) => {
     if (result.isConfirmed) {
@@ -157,13 +166,15 @@ const cancelarPedido = () => {
     title: '¿Cancelar pedido?',
     text: '¿Estás seguro de que deseas cancelarr este pedido?',
     icon: 'question',
+    iconColor: 'pink',
     showCancelButton: true,
     confirmButtonText: 'Sí, cancelar',
+    confirmButtonColor: 'red',
     cancelButtonText: 'No, no cancelar',
   }).then((result) => {
     if (result.isConfirmed) {
       // El usuario ha confirmado el pedido, puedes realizar acciones aquí
-      Swal.fire('Pedido cancelado', 'El pedido se ha cancelado con éxito.', 'success');
+      Swal.fire('Pedido cancelado', 'El pedido se ha cancelado con éxito.', 'error');
     }
   });
 

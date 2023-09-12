@@ -32,7 +32,7 @@ function ResumenDeTransaccion({ formData, setPage }) {
                             <br />
                             <Text as='i' fontSize='sm'>{formData.ciudad || 'null'} - {formData.calle || 'null'} {formData.numero || 'null'}</Text>
                         </ListItem>
-                        <Button colorScheme='pink' size='xs' onClick={() => {
+                        <Button colorScheme='blue' size='xs' onClick={() => {
                             setPage(1);
                         }}>Editar</Button>
 
@@ -45,7 +45,7 @@ function ResumenDeTransaccion({ formData, setPage }) {
                             <br />
                             <Text as='i' fontSize='sm'>{formData.indicaciones || 'null'}</Text>
                         </ListItem>
-                        <Button colorScheme='pink' size='xs' onClick={() => {
+                        <Button colorScheme='blue' size='xs' onClick={() => {
                             setPage(1);
                         }}>Editar</Button>
 
@@ -58,7 +58,7 @@ function ResumenDeTransaccion({ formData, setPage }) {
                             <br />
                             <Text as='i' fontSize='sm'> {capitalizeFirst(formData.formaDePago)}{formData.formaDePago === 'efectivo' ? ` - Entrega: $ ${formData.cantidadEfectivo || 'null'}` : ''}</Text>
                         </ListItem>
-                        <Button colorScheme='pink' size='xs' onClick={() => {
+                        <Button colorScheme='blue' size='xs' onClick={() => {
                             setPage(2);
                         }}>Editar</Button>
 
@@ -71,7 +71,7 @@ function ResumenDeTransaccion({ formData, setPage }) {
                             <br />
                             <Text as='i' fontsize='sm'> {formData.antesPosible === 'SI' ? `Lo antes posible` : `Diferido: ${fechaFormateada}`}</Text>
                         </ListItem>
-                        <Button colorScheme='pink' size='xs' onClick={() => {
+                        <Button colorScheme='blue' size='xs' onClick={() => {
                             setPage(3);
                         }}>Editar</Button>
                     </Stack>
