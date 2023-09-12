@@ -37,11 +37,20 @@ const Opciones = ({ formData, setFormData }) => {
 }
 
 const SeleccionarFechaYHora = ({ formData, setFormData }) => {
+  const fechaActual = new Date();
   const [selectedDate, setSelectedDate] = useState(formData.fecha);
   const [selectedHour, setSelectedHour] = useState(formData.fecha);
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+
+    if (date >= fechaActual) 
+    {
+      setSelectedDate(date);
+    }else 
+    {
+      setSelectedDate(fechaActual);
+    }
+
     if (selectedHour) {
       selectedHour.setTime(date)
 

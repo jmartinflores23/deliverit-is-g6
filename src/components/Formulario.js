@@ -99,14 +99,14 @@ function Formulario() {
         </Box>
         <Box mx='10' my='7' className='footer'>
           <Stack my='4' isInline justifyContent='space-between'>
-            <Button size='lg' p='3' colorScheme="blue"
+            <Button size='lg' p='3' bg="#007090" color="white"
               disabled={page === 0}
               onClick={() => {
                 setPage((currPage) => page === 0 ? currPage : currPage - 1);
               }}
             >Volver</Button>
             <Stack isInline>
-              <Button size='lg' p='3' align='end' colorScheme='linkedin'
+              <Button size='lg' p='3' align='end' bg="#007090" color="white"
                 onClick={() => {
                   cancelarPedido();
                 }}
@@ -114,7 +114,7 @@ function Formulario() {
                 <Text> Cancelar <br></br>pedido
                 </Text>
               </Button>
-              <Button size='lg' p='3' align='end' colorScheme='blue'
+              <Button size='lg' p='3' align='end' bg="#007090" color="white"
                 onClick={() => {
                   if (page === FormTitles.length - 1) {
                     confirmarPedido();
