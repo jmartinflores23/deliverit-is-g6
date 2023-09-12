@@ -2,7 +2,7 @@ import { Box, Button, Heading, List, ListItem, SimpleGrid, Stack, Text, VStack }
 import React, { useState } from "react";
 import Item from "./Item";
 
-function Carrito({ items, setItems }) {
+function Carrito({ formData, setFormData, items, setItems }) {
     const [listaItems, setListaItems] = useState(items);
     const handleDeleteItem = (nombre) => {
         const nuevoCarrito = listaItems.filter((item) => item.nombre !== nombre);
@@ -17,6 +17,7 @@ function Carrito({ items, setItems }) {
         return total;
     };
     const precioTotal = calcularPrecioTotal();
+    
     const vaciarLista = () => {
         setListaItems([]);
     }

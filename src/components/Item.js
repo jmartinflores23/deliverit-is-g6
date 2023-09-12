@@ -5,7 +5,7 @@ function Item({ imagen, nombre, precio, onDelete }) {
     const handleDeleteClick = () => { onDelete(nombre); }
 
     return (
-        <VStack borderWidth='2px' borderRadius='lg' overflow='hidden' justifyContent='space-between' h='auto'>
+        <VStack borderWidth='2px' borderRadius='lg' overflow='hidden' justifyContent='space-between' h='auto' borderColor='black'>
             <Image src={imagen} />
             <Box p='2' align='left'>
                 <Box p='1'

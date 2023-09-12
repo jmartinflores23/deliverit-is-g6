@@ -52,13 +52,14 @@ function Formulario() {
     codSeg: "",
     antesPosible: "",
     fecha: "",
+    total: "",
   });
   function noAvanzar(page) {
     switch (page) {
       case 0:
         return items.length === 0;
       case 1:
-        return (formData.calle === "" || formData.calle === "" || formData.ciudad === "");
+        return (formData.calle === "" || formData.numero === "" || formData.ciudad === "");
       case 2:
         return (formData.formaDePago === 'efectivo' && formData.cantidadEfectivo === '') ||
           (formData.formaDePago === 'tarjeta' && (formData.numeroTarjeta.length != 19 || parseInt(formData.numeroTarjeta.charAt(0)) != 4 || formData.fechaVen === '' || formData.nombreTitular === '' || formData.codSeg.length != 3)) ||
@@ -74,7 +75,7 @@ function Formulario() {
   const PageDisplay = () => {
     switch (page) {
       case 0:
-        return <Carrito items={items} setItems={setItems}></Carrito>
+        return <Carrito formData={formData} setFormData={setFormData} items={items} setItems={setItems}></Carrito>
       case 1:
         return <Direccion formData={formData} setFormData={setFormData} />
       case 2:
@@ -97,16 +98,16 @@ function Formulario() {
         <Box className='body'>
           {PageDisplay()}
         </Box>
-        <Box mx='10' my='7' className='footer'>
+        <Box mx='10' my='7' p='1' className='footer'>
           <Stack my='4' isInline justifyContent='space-between'>
-            <Button size='lg' p='3' bg="#007090" color="white"
+            <Button size='lg' p='3' colorScheme='blue'
               disabled={page === 0}
               onClick={() => {
                 setPage((currPage) => page === 0 ? currPage : currPage - 1);
               }}
             >Volver</Button>
             <Stack isInline>
-              <Button size='lg' p='3' align='end' bg="#007090" color="white"
+              <Button size='lg' p='3' align='end' colorScheme='blue'
                 onClick={() => {
                   cancelarPedido();
                 }}
@@ -114,7 +115,7 @@ function Formulario() {
                 <Text> Cancelar <br></br>pedido
                 </Text>
               </Button>
-              <Button size='lg' p='3' align='end' bg="#007090" color="white"
+              <Button size='lg' p='3' align='end' colorScheme='blue'
                 onClick={() => {
                   if (page === FormTitles.length - 1) {
                     confirmarPedido();

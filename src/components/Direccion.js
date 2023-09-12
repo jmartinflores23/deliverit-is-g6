@@ -16,13 +16,13 @@ const DireccionBody = ({ formData, setFormData }) => {
       <SimpleGrid p='1' minChildWidth='120px' spacing={4} >
         <Box>
           <FormLabel> Calle:</FormLabel>
-          <Input borderWidth={2} placeholder={formData.calle || "Ingrese la calle:"} onChange={(e) =>
+          <Input borderColor='black' borderWidth={2} placeholder={formData.calle || "Ingrese la calle:"} onChange={(e) =>
             setFormData({ ...formData, calle: e.target.value })} />
         </Box>
         <Box>
           <FormLabel borderRadius='lg' >Número:</FormLabel>
           <NumberInput >
-            <NumberInputField borderWidth={2} placeholder={formData.numero || "Ingrese el número:"} onChange={(e) =>
+            <NumberInputField  borderColor='black' borderWidth={2} placeholder={formData.numero || "Ingrese el número:"} onChange={(e) =>
               setFormData({ ...formData, numero: e.target.value })} />
           </NumberInput>
         </Box>
@@ -38,7 +38,7 @@ const DireccionBody = ({ formData, setFormData }) => {
 
       <Stack>
         <FormLabel>Indicaciones para el repartidor:</FormLabel>
-        <Textarea placeholder={formData.indicaciones || "Opcionalmente puede agregarle notas a su repartidor..."} onChange={(e) =>
+        <Textarea borderColor='black' placeholder={formData.indicaciones || "Opcionalmente puede agregarle notas a su repartidor..."} onChange={(e) =>
           setFormData({ ...formData, indicaciones: e.target.value })} />
       </Stack>
     </Box>
@@ -46,7 +46,7 @@ const DireccionBody = ({ formData, setFormData }) => {
 }
 const SelectorDireccion = ({ formData, setFormData }) => {
   return (
-    <Select borderWidth={2} placeholder={formData.ciudad || "Seleccione"} onChange={(e) =>
+    <Select borderWidth={2} borderColor='black' placeholder={formData.ciudad || "Seleccione"} onChange={(e) =>
       setFormData({ ...formData, ciudad: e.target.value })}>
       <option value='Alta Gracia'> Alta Gracia</option>
       <option value='Córdoba'>Córdoba</option>
