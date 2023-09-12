@@ -3,17 +3,13 @@ import { Stack, HStack, Box, Heading, Flex, Text, Input, InputLeftElement, Input
 import ExpiryDateInput from './ExpiryDateInput';
 import InputMask from "react-input-mask";
 import { CalendarIcon, UnlockIcon } from '@chakra-ui/icons';
-import { FaCcVisa, FaCcMastercard} from 'react-icons/fa'
+import { FaCcVisa} from 'react-icons/fa'
 
 
 function Pago({ formData, setFormData,}) {
   const [opcionSelecc, setOpcionSelecc] = useState('efectivo');
   const [numeroTarjeta, setNumeroTarjeta] = useState('');
 
-  const handleChange = (e) => {
-    const nuevoNumeroTarjeta = e.target.value;
-    setNumeroTarjeta(nuevoNumeroTarjeta);
-  };
 
   const determinarTipoDeTarjeta = (numeroTarjeta) => {
     const firstDigit = parseInt(numeroTarjeta.charAt(0));
@@ -21,7 +17,9 @@ function Pago({ formData, setFormData,}) {
     if (firstDigit === 4) {
       return <FaCcVisa size='3em'/>;
     } else if (firstDigit === 5) {
-      return <FaCcMastercard size='3em'/>;
+      return <Text color='red'>Sólo aceptamos tarjeta Visa</Text>;
+    } else{
+      return <Text color='red'>Sólo aceptamos tarjeta Visa</Text>
     }
   }
 
@@ -33,7 +31,6 @@ function Pago({ formData, setFormData,}) {
   };
 
   return (
-
     <Box textAlign='center' >
       <Stack justifyContent='center'>
         <Flex direction='column'>
@@ -54,7 +51,7 @@ function Pago({ formData, setFormData,}) {
               <InputGroup>
               <InputLeftElement pointerEvents='none' color='gray.500' fontSize='1.2em' children='$'/>
                 <Input type='number' placeholder={formData.cantidadEfectivo || "Monto a abonar"} onChange={(e) =>
-                handleChange && setFormData({ ...formData, cantidadEfectivo: e.target.value, formaDePago: 'efectivo', numeroTarjeta: '', fechaVen: '', codSeg: '' })} variant='filled' htmlsize={5} ></Input>
+                setFormData({ ...formData, cantidadEfectivo: e.target.value, formaDePago: 'efectivo', nombreTitular: '', numeroTarjeta: '', fechaVen: '', codSeg: '' })} variant='filled' htmlsize={5} ></Input>
               </InputGroup>
             </Stack>}
           {formData.formaDePago === 'tarjeta' &&
