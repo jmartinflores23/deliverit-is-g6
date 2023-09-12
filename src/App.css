@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
 
+./{
+  background-color: #EAEBED;
+}
+
 .App {
   text-align: center;
+  background-color: #EAEBED;
 }
 div .lineaVertical{
   width: 2px;
@@ -10,7 +15,6 @@ div .lineaVertical{
 }
 
 .caja{
-  background-color: rgb(211, 95, 192);
   align-items: center;
   color: black;
   width: 500px;
@@ -35,7 +39,6 @@ div .lineaVertical{
 }
 
 .cajaTarjeta{
-  background-color: rgb(211, 95, 192);
   align-items: left;
   color: black;
   width: 500px;
