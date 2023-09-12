@@ -43,7 +43,7 @@ function ResumenDeTransaccion({ formData, setPage }) {
                             <ListIcon as={MdCheckCircle} color='green.500' />
                             Indicaciones al repartidor:
                             <br />
-                            <Text as='i' fontSize='sm'>{formData.indicaciones || 'null'}</Text>
+                            <Text as='i' fontSize='sm'>{formData.indicaciones || ''}</Text>
                         </ListItem>
                         <Button colorScheme='blue' size='xs' onClick={() => {
                             setPage(1);
